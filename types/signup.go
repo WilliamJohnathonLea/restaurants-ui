@@ -5,5 +5,4 @@ type SignupRequest struct {
 	Password        string `form:"password"`
 	ConfirmPassword string `form:"confirm-password"`
 	UserType        string `form:"user-type"`
-	Check           string `form:"check"`
 }

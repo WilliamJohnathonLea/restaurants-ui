@@ -27,7 +27,7 @@
                 </select>
             </div>
 
-            <input type="hidden" name="check" id="check" value="{{ .check }}" />
+            <input type="hidden" name="_csrf" id="_csrf" value="{{ .csrfToken }}" />
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
