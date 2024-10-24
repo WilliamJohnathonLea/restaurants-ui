@@ -17,6 +17,7 @@ func main() {
 		})
 	})
 
+	// Login
 	router.GET("/login", func(ctx *gin.Context) {
 		ctx.HTML(http.StatusOK, "login.html", gin.H{
 			"title": "Login",
@@ -25,6 +26,18 @@ func main() {
 	})
 
 	router.POST("/login", func(ctx *gin.Context) {
+		ctx.Redirect(http.StatusSeeOther, "/")
+	})
+
+	// Signup
+	router.GET("/signup", func(ctx *gin.Context) {
+		ctx.HTML(http.StatusOK, "signup.html", gin.H{
+			"title": "Signup",
+			"check": uuid.NewString(),
+		})
+	})
+
+	router.POST("/signup", func(ctx *gin.Context) {
 		ctx.Redirect(http.StatusSeeOther, "/")
 	})
 
