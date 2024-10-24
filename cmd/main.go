@@ -3,6 +3,7 @@ package main
 import (
 	"net/http"
 
+	"github.com/WilliamJohnathonLea/restaurants-ui/handlers"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 )
@@ -25,9 +26,7 @@ func main() {
 		})
 	})
 
-	router.POST("/login", func(ctx *gin.Context) {
-		ctx.Redirect(http.StatusSeeOther, "/")
-	})
+	router.POST("/login", handlers.LoginHandler)
 
 	// Signup
 	router.GET("/signup", func(ctx *gin.Context) {
@@ -37,9 +36,7 @@ func main() {
 		})
 	})
 
-	router.POST("/signup", func(ctx *gin.Context) {
-		ctx.Redirect(http.StatusSeeOther, "/")
-	})
+	router.POST("/signup", handlers.SignupHandler)
 
 	router.Run(":8080")
 }

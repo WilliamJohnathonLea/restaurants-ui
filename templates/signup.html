@@ -19,6 +19,13 @@
                 <label for="confirm-password" class="form-label">Confirm password</label>
                 <input type="password" class="form-control" name="confirm-password" id="confirm-password">
             </div>
+            <div class="mb-3">
+                <label for="user-type" class="form-label">Are you signing up as a customer or a restaurant?</label>
+                <select class="form-select" id="user-type" name="user-type">
+                    <option value="customer">Customer</option>
+                    <option value="restaurant">Restaurant</option>
+                </select>
+            </div>
 
             <input type="hidden" name="check" id="check" value="{{ .check }}" />
             <button type="submit" class="btn btn-primary">Submit</button>
