@@ -62,6 +62,24 @@ func SignupHandler(ctx *gin.Context) {
 		return
 	}
 
+	url := os.Getenv("USER_SERVICE_HOST") + "/users"
+	jsonBytes, err := json.Marshal(req)
+	if err != nil {
+		ctx.Redirect(http.StatusSeeOther, "/")
+		return
+	}
+	resp, err := http.Post(url, "application/json", bytes.NewBuffer(jsonBytes))
+	if err != nil {
+		ctx.Redirect(http.StatusSeeOther, "/")
+		return
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusCreated {
+		ctx.Redirect(http.StatusSeeOther, "/")
+		return
+	}
+
 	ctx.Redirect(http.StatusSeeOther, "/")
 }
 
@@ -71,7 +89,7 @@ func LogoutHander(ctx *gin.Context) {
 	sess.Save()
 
 	ctx.HTML(http.StatusOK, "logged-out.html", gin.H{
-		"title":     "Signup",
+		"title":     "Logged out",
 		"signedIn":  false,
 	})
 }
