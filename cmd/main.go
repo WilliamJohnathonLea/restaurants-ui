@@ -1,7 +1,6 @@
 package main
 
 import (
-	"net/http"
 	"os"
 
 	"github.com/WilliamJohnathonLea/restaurants-ui/handlers"
@@ -25,31 +24,16 @@ func main() {
 		Secret: os.Getenv("CSRF_SECRET"),
 	}))
 
-	router.GET("/", func(ctx *gin.Context) {
-		ctx.HTML(http.StatusOK, "index.html", gin.H{
-			"title": "Hello",
-		})
-	})
-
+	// Home
+	router.GET("/", handlers.Homepage)
 	// Login
-	router.GET("/login", func(ctx *gin.Context) {
-		ctx.HTML(http.StatusOK, "login.html", gin.H{
-			"title": "Login",
-			"csrfToken": csrf.GetToken(ctx),
-		})
-	})
-
+	router.GET("/login", handlers.LoginPage)
 	router.POST("/login", handlers.LoginHandler)
-
 	// Signup
-	router.GET("/signup", func(ctx *gin.Context) {
-		ctx.HTML(http.StatusOK, "signup.html", gin.H{
-			"title": "Signup",
-			"csrfToken": csrf.GetToken(ctx),
-		})
-	})
-
+	router.GET("/signup", handlers.SignupPage)
 	router.POST("/signup", handlers.SignupHandler)
+	// Logout
+	router.GET("/logout", handlers.LogoutHander)
 
 	router.Run(":8080")
 }
