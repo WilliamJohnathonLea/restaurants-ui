@@ -34,6 +34,9 @@ func main() {
 	router.POST("/signup", handlers.SignupHandler)
 	// Logout
 	router.GET("/logout", handlers.LogoutHander)
+	// Restaurant
+	router.GET("/restaurants", handlers.RestaurantsPage)
+	router.GET("/restaurants/:id", handlers.RestaurantPage)
 
 	router.Run(":8080")
 }

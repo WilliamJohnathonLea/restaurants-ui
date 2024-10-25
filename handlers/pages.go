@@ -33,3 +33,21 @@ func SignupPage(ctx *gin.Context) {
 		"csrfToken": csrf.GetToken(ctx),
 	})
 }
+
+func RestaurantsPage(ctx *gin.Context) {
+	signedIn := sessions.Default(ctx).Get("user_token") != nil
+	ctx.HTML(http.StatusOK, "restaurants.html", gin.H{
+		"title":        "Restaurants",
+		"signedIn":     signedIn,
+	})
+}
+
+func RestaurantPage(ctx *gin.Context) {
+	signedIn := sessions.Default(ctx).Get("user_token") != nil
+	restaurantID := ctx.Param("id")
+	ctx.HTML(http.StatusOK, "restaurant.html", gin.H{
+		"title":        "Restaurant",
+		"restaurantId": restaurantID,
+		"signedIn":     signedIn,
+	})
+}
